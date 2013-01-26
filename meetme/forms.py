@@ -17,7 +17,7 @@ class MeetmeForm(forms.ModelForm):
         self.initial['room'] = random.randint(00000,99999)  
         self.fields['start_date'].widget = widgets.AdminSplitDateTime()
         self.fields['end_date'].widget = widgets.AdminSplitDateTime()
-        self.fields['description'].widget = widgets.TextInput(attrs={'size':'40'})
+        self.fields['description'].widget = forms.TextInput(attrs={'size':'60'})
 
     def save(self, commit=True):
         model = super(MeetmeForm, self).save(commit=False)
