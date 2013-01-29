@@ -4,8 +4,8 @@ from forms import MeetmeForm
 
 class MeetmeAdmin(admin.ModelAdmin):
 #    readonly_fields = ('room',)
-    list_display = ('room','start_date','end_date','description')
-    list_filter = ('start_date',)
+    list_display = ('room','start_time','duration','description')
+    list_filter = ('start_time',)
 #    list_editable = ('start_date','end_date')
 
     def get_form(self, request, obj=None, **kwargs):

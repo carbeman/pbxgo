@@ -1,10 +1,9 @@
 from django.db import models
-import random
 
 class Meetme(models.Model):
-	room = models.IntegerField() #default=random.randint(00000,99999))
-	start_date = models.DateTimeField()
-	end_date = models.DateTimeField()
+	room = models.IntegerField()
+	start_time = models.DateTimeField()
+	duration = models.IntegerField()
 	description = models.CharField(max_length=200)
 
 	def __unicode__(self):

@@ -5,8 +5,8 @@ from django.contrib.admin import widgets
 
 class MeetmeForm(forms.ModelForm):      
     room = forms.IntegerField(min_value=00000,max_value=99999)
-    start_date = forms.DateTimeField()
-    end_date = forms.DateTimeField()
+    start_time = forms.DateTimeField()
+    duration = forms.IntegerField()
     description = forms.CharField(max_length=200)
 
     class Meta:
@@ -14,9 +14,9 @@ class MeetmeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(MeetmeForm, self).__init__(*args, **kwargs)
-        self.initial['room'] = random.randint(00000,99999)  
-        self.fields['start_date'].widget = widgets.AdminSplitDateTime()
-        self.fields['end_date'].widget = widgets.AdminSplitDateTime()
+        self.initial['room'] = random.randint(10000,99999)  
+        self.fields['start_time'].widget = widgets.AdminSplitDateTime()
+        self.fields['duration'].widget = forms.Select(choices=[(d, d) for d in range (1,11)])
         self.fields['description'].widget = forms.TextInput(attrs={'size':'60'})
 
     def save(self, commit=True):
