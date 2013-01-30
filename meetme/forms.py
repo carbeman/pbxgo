@@ -4,7 +4,7 @@ import random
 from django.contrib.admin import widgets   
 
 class MeetmeForm(forms.ModelForm):      
-    room = forms.IntegerField(min_value=00000,max_value=99999)
+    room = forms.IntegerField()
     start_time = forms.DateTimeField()
     duration = forms.IntegerField()
     description = forms.CharField(max_length=200)
@@ -23,14 +23,9 @@ class MeetmeForm(forms.ModelForm):
 
         self.fields['start_time'].widget = widgets.AdminSplitDateTime()
         self.fields['duration'].widget = forms.Select(choices=[(d, d) for d in range (1,11)])
-        self.fields['description'].widget = forms.TextInput(attrs={'size':'60'})
+        self.fields['description'].widget = forms.TextInput(attrs={'size':'80'})
 
-    def save(self, commit=True):
-        model = super(MeetmeForm, self).save(commit=False)
-
-        if commit:
-            model.save()
-
-        return model
-
-
+        self.fields['room'].help_text = "Il numero di stanza da digitare al telefono quando verra' richiesto. Non va modificato." 
+        self.fields['start_time'].help_text = "Data ed ora d'inizio."
+        self.fields['duration'].help_text = "Durata della conferenza espressa in ore."
+        self.fields['description'].help_text = "Breve descrizione dell'evento."
